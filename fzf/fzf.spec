@@ -24,6 +24,7 @@ with omitted characters and still get the results you want.
 
 %build
 %global gomodulesmode GO111MODULE=on
+export GOFLAGS="-modcacherw"
 export GO_LDFLAGS="-s -w -X main.version=%{version} -X main.revision=cli-tools"
 %gobuild -o %{gobuilddir}/bin/%{name} %{goipath}
 
