@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 %global goipath github.com/junegunn/fzf
 
-Version: 0.72.0
+Version: 0.73.1
 %gometa -fL
 
 Name:    fzf
@@ -54,5 +54,8 @@ install -Dpm 0644 shell/completion.zsh %{buildroot}%{zsh_completions_dir}/_fzf
 %{zsh_completions_dir}/_fzf
 
 %changelog
+* Sat Jun 06 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.73.1-1
+- chore(fzf): update to 0.73.1
+
 * Sun May 31 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.72.0-1
 - feat(fzf): add fzf package
