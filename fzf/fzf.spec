@@ -1,17 +1,14 @@
 %global debug_package %{nil}
-%global goipath github.com/junegunn/fzf
 
+Name: fzf
 Version: 0.73.1
-%gometa -fL
-
-Name:    fzf
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Command line fuzzy finder
 License: MIT
-URL:     %{gourl}
-Source0: %{gosource}
+URL: https://github.com/junegunn/%{name}
+Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires: go-vendor-tools
+BuildRequires: golang
 
 %description
 Interactive filter program for any kind of list;
@@ -20,16 +17,14 @@ It implements a "fuzzy" matching algorithm, so you can quickly type in patterns
 with omitted characters and still get the results you want.
 
 %prep
-%goprep
+%autosetup
 
 %build
-%global gomodulesmode GO111MODULE=on
-export GOFLAGS="-modcacherw"
-export GO_LDFLAGS="-s -w -X main.version=%{version} -X main.revision=cli-tools"
-%gobuild -o %{gobuilddir}/bin/%{name} %{goipath}
+go build -buildmode=pie -o bin/%{name} \
+	-ldflags="-s -w -X main.version=%{version} -X main.revision=cli-tools"
 
 %install
-install -Dpm 0755 -t %{buildroot}%{_bindir} %{gobuilddir}/bin/%{name} bin/%{name}-tmux
+install -Dpm 0755 -t %{buildroot}%{_bindir}/ bin/%{name} bin/%{name}-tmux
 install -Dpm 0644 -t %{buildroot}%{_mandir}/man1 man/man1/%{name}.1 man/man1/%{name}-tmux.1
 
 # Install in /etc instead of /usr/share
@@ -40,7 +35,7 @@ install -Dpm 0644 shell/completion.fish %{buildroot}%{fish_completions_dir}/fzf.
 install -Dpm 0644 shell/completion.zsh %{buildroot}%{zsh_completions_dir}/_fzf
 
 %check
-%gocheck2
+go test ./...
 
 %files
 %license LICENSE
@@ -54,6 +49,9 @@ install -Dpm 0644 shell/completion.zsh %{buildroot}%{zsh_completions_dir}/_fzf
 %{zsh_completions_dir}/_fzf
 
 %changelog
+* Mon Jun 08 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.73.1-2
+- feat(fzf): remove go-rpm-macros facilities
+
 * Sat Jun 06 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.73.1-1
 - chore(fzf): update to 0.73.1
 
