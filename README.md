@@ -3,3 +3,4 @@ Spec files for my [copr repository](https://copr.fedorainfracloud.org/coprs/kray
 Packages:
 - [fzf](https://github.com/junegunn/fzf)
 - [starship](https://github.com/starship/starship)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
