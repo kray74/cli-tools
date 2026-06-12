@@ -5,7 +5,7 @@ Version: 0.73.1
 Release: 2%{?dist}
 Summary: Command line fuzzy finder
 License: MIT
-URL: https://github.com/junegunn/%{name}
+URL: https://github.com/junegunn/fzf
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: golang
