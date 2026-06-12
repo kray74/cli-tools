@@ -2,13 +2,14 @@
 
 Name: lazygit
 Version: 0.62.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Simple terminal UI for git commands
 License: MIT
 URL: https://github.com/jesseduffield/lazygit
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: golang
+BuildRequires: git-core
 
 %description
 %{summary}.
@@ -32,5 +33,8 @@ go test -short ./...
 %{_bindir}/%{name}
 
 %changelog
+* Fri Jun 12 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.62.2-2
+- fix(lazygit): add git-core build dependency required for tests
+
 * Fri Jun 12 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.62.2-1
 - feat(lazygit): add lazygit package
