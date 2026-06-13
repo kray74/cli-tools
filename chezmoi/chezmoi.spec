@@ -2,7 +2,7 @@
 
 Name: chezmoi
 Version: 2.70.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Manage your dotfiles across multiple diverse machines, securely
 License: MIT
 URL: https://github.com/twpayne/chezmoi
@@ -29,7 +29,7 @@ including:
 %build
 go build -buildmode=pie -o bin/%{name} -ldflags="-s -w \
 	-X main.version=%{version} \
-	-X main.date=$(date -u -Iseconds -d "@${SOURCE_DATE_EPOCH}")"
+	-X main.date=$(date -u -I -d "@${SOURCE_DATE_EPOCH}")"
 
 %install
 install -Dpm 0755 -t %{buildroot}%{_bindir}/ bin/%{name}
@@ -49,5 +49,8 @@ go test ./...
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sat Jun 13 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.70.5-2
+- fix(chezmoi): remove time from --version output
+
 * Sat Jun 13 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.70.5-1
 - feat(chezmoi): add chezmoi package
