@@ -6,4 +6,5 @@ Packages:
 - [fzf](https://github.com/junegunn/fzf)
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [starship](https://github.com/starship/starship)
+- [topgrade](https://github.com/topgrade-rs/topgrade)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
