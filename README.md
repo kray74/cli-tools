@@ -8,4 +8,5 @@ Packages:
 - [starship](https://github.com/starship/starship)
 - [tailscale](https://github.com/tailscale/tailscale)
 - [topgrade](https://github.com/topgrade-rs/topgrade)
+- [vivid](https://github.com/sharkdp/vivid)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
