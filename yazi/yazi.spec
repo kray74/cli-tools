@@ -3,13 +3,14 @@
 
 Name: yazi
 Version: 26.5.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Blazing fast terminal file manager written in Rust, based on async I/O
 License: MIT
 URL: https://github.com/sxyazi/yazi
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: curl
+BuildRequires: gcc
 
 Recommends: ffmpeg
 Recommends: 7zip
@@ -57,5 +58,8 @@ cargo test --workspace --release --locked
 %{zsh_completions_dir}/_{%{name},%{yazicli}}
 
 %changelog
+* Mon Jun 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 26.5.6-2
+- fix(yazi): add gcc to build dependencies
+
 * Mon Jun 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 26.5.6-1
 - feat(yazi): add yazi package
