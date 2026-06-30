@@ -2,7 +2,7 @@
 
 Name: starship
 Version: 1.26.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The minimal, blazing-fast, and infinitely customizable prompt for any shell
 
 License: ISC
@@ -11,6 +11,7 @@ Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: cargo
 BuildRequires: rust
+BuildRequires: tzdata
 
 # for tests
 BuildRequires: git-core
@@ -36,6 +37,9 @@ cargo test --release --locked
 %{_bindir}/%{name}
 
 %changelog
+* Tue Jun 30 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 1.26.0-2
+- fix(starship): tzdata package is required for tests
+
 * Tue Jun 30 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 1.26.0-1
 - chore(starship): update to 1.26.0
 
