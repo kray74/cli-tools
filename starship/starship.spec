@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: starship
-Version: 1.25.1
+Version: 1.26.0
 Release: 1%{?dist}
 Summary: The minimal, blazing-fast, and infinitely customizable prompt for any shell
 
@@ -36,5 +36,8 @@ cargo test --release --locked
 %{_bindir}/%{name}
 
 %changelog
+* Tue Jun 30 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 1.26.0-1
+- chore(starship): update to 1.26.0
+
 * Sun Jun 07 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 1.25.1-1
 - feat(starship): add starship package
