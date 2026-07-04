@@ -2,8 +2,8 @@
 %global daemon tailscaled
 
 Name: tailscale
-Version: 1.98.5
-Release: 2%{?dist}
+Version: 1.98.8
+Release: 1%{?dist}
 Summary: The easiest, most secure way to use WireGuard and 2FA
 License: BSD-3-Clause
 URL: https://github.com/tailscale/tailscale
@@ -68,6 +68,9 @@ install -Dpm 0644 -t %{buildroot}%{_unitdir}/ cmd/%{daemon}/%{daemon}.service
 %dir %{_localstatedir}/cache/%{name}
 
 %changelog
+* Sat Jul  4 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.98.8-1
+- chore(tailscale): update to 1.98.8
+
 * Sun Jun 14 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.98.5-2
 - fix(tailscale): tailscaled.service must use /bin/tailscaled with sane defaults
 
