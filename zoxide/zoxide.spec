@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: zoxide
-Version: 0.9.9
+Version: 0.10.0
 Release: 1%{?dist}
 Summary: Smarter cd command, inspired by z and autojump
 
@@ -44,5 +44,8 @@ cargo test --release --locked
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sat Jul 11 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 0.10.0-1
+- chore(zoxide): update to 0.10.0
+
 * Wed Jun 10 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 0.9.9-1
 - feat(zoxide): add zoxide package
