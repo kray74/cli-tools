@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: eza
-Version: 0.23.4
+Version: 0.23.5
 Release: 1%{?dist}
 Summary: Modern replacement for ls
 
@@ -56,5 +56,8 @@ cargo test --release --locked
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sat Jul 11 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 0.23.5-1
+- chore(eza): update to 0.23.5
+
 * Fri Jun 12 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 0.23.4-1
 - feat(eza): add eza package
