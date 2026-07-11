@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: topgrade
-Version: 17.6.2
+Version: 17.7.0
 Release: 1%{?dist}
 Summary: Upgrade all the things
 License: GPL-3.0-or-later
@@ -48,6 +48,9 @@ cargo test --release --locked
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sat Jul 11 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 17.7.0-1
+- chore(topgrade): update to 17.7.0
+
 * Thu Jun 25 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 17.6.2-1
 - chore(topgrade): update to 17.6.2
 
