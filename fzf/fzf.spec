@@ -1,9 +1,9 @@
 %global debug_package %{nil}
 
 Name: fzf
-Version: 0.73.1
-Release: 2%{?dist}
-Summary: Command line fuzzy finder
+Version: 0.74.0
+Release: 1%{?dist}
+Summary: Command line fuzzy finder and an interactive terminal toolkit
 License: MIT
 URL: https://github.com/junegunn/fzf
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -11,10 +11,10 @@ Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires: golang
 
 %description
-Interactive filter program for any kind of list;
-files, command history, processes, hostnames, bookmarks, git commits, etc.
-It implements a "fuzzy" matching algorithm, so you can quickly type in patterns
-with omitted characters and still get the results you want.
+Whether you're selecting files, browsing command history, previewing data,
+navigating complex datasets with fuzzy matching, or creating custom menus and
+workflows, fzf provides the building blocks to turn shell scripts into rich
+terminal applications.
 
 %prep
 %autosetup
@@ -49,6 +49,9 @@ go test ./...
 %{zsh_completions_dir}/_fzf
 
 %changelog
+* Sat Jul 11 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.74.0-1
+- chore(fzf): update to 0.74.0
+
 * Mon Jun 08 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.73.1-2
 - feat(fzf): remove go-rpm-macros facilities
 
