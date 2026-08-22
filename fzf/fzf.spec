@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: fzf
-Version: 0.74.2
+Version: 0.74.3
 Release: 1%{?dist}
 Summary: Command line fuzzy finder and an interactive terminal toolkit
 License: MIT
@@ -49,6 +49,9 @@ go test ./...
 %{zsh_completions_dir}/_fzf
 
 %changelog
+* Sat Aug 22 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.74.3-1
+- chore(fzf): update to 0.74.3
+
 * Sat Aug 1 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.74.2-1
 - chore(fzf): update to 0.74.2
 
