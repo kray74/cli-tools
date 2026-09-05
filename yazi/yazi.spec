@@ -2,7 +2,7 @@
 %global yazicli ya
 
 Name: yazi
-Version: 26.8.15
+Version: 26.9.1
 Release: 1%{?dist}
 Summary: Blazing fast terminal file manager written in Rust, based on async I/O
 License: MIT
@@ -59,6 +59,9 @@ cargo test --workspace --release --locked
 %{zsh_completions_dir}/_{%{name},%{yazicli}}
 
 %changelog
+* Sat Sep 5 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 26.9.1-1
+- chore(yazi): update to 26.9.1
+
 * Sat Aug 22 2026 Vasiliy Biryukov <kray74vb@gmail.com> - 26.8.15-1
 - chore(yazi): update to 26.8.15
 
