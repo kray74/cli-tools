@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: lazygit
-Version: 0.65.1
+Version: 0.66.0
 Release: 1%{?dist}
 Summary: Simple terminal UI for git commands
 License: MIT
@@ -33,6 +33,9 @@ go test -short -skip="TestFailingFixture" ./...
 %{_bindir}/%{name}
 
 %changelog
+* Sat Oct 10 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.66.0-1
+- chore(lazygit): update to 0.66.0
+
 * Sat Sep 19 2026 Vasiliy Biryukov <kray74vb@gmail.com> 0.65.1-1
 - chore(lazygit): update to 0.65.1
 
