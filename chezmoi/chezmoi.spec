@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name: chezmoi
-Version: 2.73.0
+Version: 2.73.1
 Release: 1%{?dist}
 Summary: Manage your dotfiles across multiple diverse machines, securely
 License: MIT
@@ -49,6 +49,9 @@ go test ./...
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sat Oct 17 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.73.1-1
+- chore(chezmoi): update to 2.73.1
+
 * Sat Oct 3 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.73.0-1
 - chore(chezmoi): update to 2.73.0
 
