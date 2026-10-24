@@ -2,7 +2,7 @@
 %global daemon tailscaled
 
 Name: tailscale
-Version: 1.102.5
+Version: 1.104.2
 Release: 1%{?dist}
 Summary: The easiest, most secure way to use WireGuard and 2FA
 License: BSD-3-Clause
@@ -18,12 +18,18 @@ BuildRequires: systemd-rpm-macros
 %prep
 %autosetup
 
+# system go is too old (go 1.27.3 required)
+go install golang.org/dl/go1.27.3@latest
+export PATH="$HOME/go/bin:$PATH"
+go1.27.3 download
+
 %build
+export PATH="$HOME/go/bin:$PATH"
 export LDFLAGS="-s -w \
 	-X tailscale.com/version.longStamp=%{version} \
 	-X tailscale.com/version.shortStamp=%{version}"
-go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
-go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
+go1.27.3 build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
+go1.27.3 build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
 
 build/%{name} completion bash > build/%{name}.bash
 build/%{name} completion fish > build/%{name}.fish
@@ -68,6 +74,9 @@ install -Dpm 0644 -t %{buildroot}%{_unitdir}/ cmd/%{daemon}/%{daemon}.service
 %dir %{_localstatedir}/cache/%{name}
 
 %changelog
+* Sat Oct 24 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.104.2-1
+- chore(tailscale): update to 1.104.2
+
 * Sat Oct 3 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.102.5-1
 - chore(tailscale): update to 1.102.5
 
