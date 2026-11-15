@@ -2,14 +2,18 @@
 
 Name: chezmoi
 Version: 2.74.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Manage your dotfiles across multiple diverse machines, securely
 License: MIT
 URL: https://github.com/twpayne/chezmoi
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+Requires: git-core
+
 BuildRequires: golang
-Recommends: git-core
+
+# for tests
+BuildRequires: git-core
 
 %description
 chezmoi helps you manage your personal configuration files
@@ -49,6 +53,9 @@ go test ./...
 %{zsh_completions_dir}/_%{name}
 
 %changelog
+* Sun Nov 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.74.1-2
+- fix(chezmoi): add git-core to dependencies
+
 * Sun Nov 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> 2.74.1-1
 - chore(chezmoi): update to 2.74.1
 
