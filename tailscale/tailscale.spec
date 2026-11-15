@@ -2,7 +2,7 @@
 %global daemon tailscaled
 
 Name: tailscale
-Version: 1.104.4
+Version: 1.104.7
 Release: 1%{?dist}
 Summary: The easiest, most secure way to use WireGuard and 2FA
 License: BSD-3-Clause
@@ -10,6 +10,7 @@ URL: https://github.com/tailscale/tailscale
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: golang
+BuildRequires: gawk, sed
 BuildRequires: systemd-rpm-macros
 
 %description
@@ -18,18 +19,25 @@ BuildRequires: systemd-rpm-macros
 %prep
 %autosetup
 
-# system go is too old (go 1.27.3 required)
-go install golang.org/dl/go1.27.3@latest
-export PATH="$HOME/go/bin:$PATH"
-go1.27.3 download
+%global go_version %(go version 2>/dev/null | awk '{print $3}' | sed 's/go//')
+%global go_required 1.27.4
+%if %[ v"%{go_version}" < v"%{go_required}" ]
+	# system go is too old
+	go install golang.org/dl/go%{go_required}@latest
+	export PATH="$HOME/go/bin:$PATH"
+	go%{go_required} download
+	%global go go%{go_required}
+%else
+	%global go go
+%endif
 
 %build
 export PATH="$HOME/go/bin:$PATH"
 export LDFLAGS="-s -w \
 	-X tailscale.com/version.longStamp=%{version} \
 	-X tailscale.com/version.shortStamp=%{version}"
-go1.27.3 build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
-go1.27.3 build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
+%go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
+%go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
 
 build/%{name} completion bash > build/%{name}.bash
 build/%{name} completion fish > build/%{name}.fish
@@ -74,6 +82,9 @@ install -Dpm 0644 -t %{buildroot}%{_unitdir}/ cmd/%{daemon}/%{daemon}.service
 %dir %{_localstatedir}/cache/%{name}
 
 %changelog
+* Sun Nov 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.104.7-1
+- feat(tailscale): Conditionally download required go version. Update to 1.104.7
+
 * Sat Oct 31 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.104.4-1
 - chore(tailscale): update to 1.104.4
 
