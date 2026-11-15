@@ -3,7 +3,7 @@
 
 Name: tailscale
 Version: 1.104.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The easiest, most secure way to use WireGuard and 2FA
 License: BSD-3-Clause
 URL: https://github.com/tailscale/tailscale
@@ -19,25 +19,25 @@ BuildRequires: systemd-rpm-macros
 %prep
 %autosetup
 
-%global go_version %(go version 2>/dev/null | awk '{print $3}' | sed 's/go//')
+%build
+# Install required go version if system is too old
 %global go_required 1.27.4
-%if %[ v"%{go_version}" < v"%{go_required}" ]
-	# system go is too old
+go_version=$(go version | awk '{print $3}' | sed 's/go//')
+if [ "$(printf '%s\n' "$go_version" "%{go_required}" | sort -V | head -n1)" = "$go_version" ] &&
+	[ "$goversion" != "%{go_required}" ]; then
 	go install golang.org/dl/go%{go_required}@latest
 	export PATH="$HOME/go/bin:$PATH"
 	go%{go_required} download
-	%global go go%{go_required}
-%else
-	%global go go
-%endif
+	GO=go%{go_required}
+else
+	GO=go
+fi
 
-%build
-export PATH="$HOME/go/bin:$PATH"
 export LDFLAGS="-s -w \
 	-X tailscale.com/version.longStamp=%{version} \
 	-X tailscale.com/version.shortStamp=%{version}"
-%go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
-%go build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
+$GO build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{name} ./cmd/%{name}
+$GO build -buildmode=pie -trimpath -ldflags="${LDFLAGS}" -o build/%{daemon} ./cmd/%{daemon}
 
 build/%{name} completion bash > build/%{name}.bash
 build/%{name} completion fish > build/%{name}.fish
@@ -82,6 +82,9 @@ install -Dpm 0644 -t %{buildroot}%{_unitdir}/ cmd/%{daemon}/%{daemon}.service
 %dir %{_localstatedir}/cache/%{name}
 
 %changelog
+* Sun Nov 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.104.7-2
+- fix(tailscale): move go version check to the build time
+
 * Sun Nov 15 2026 Vasiliy Biryukov <kray74vb@gmail.com> 1.104.7-1
 - feat(tailscale): Conditionally download required go version. Update to 1.104.7
 
